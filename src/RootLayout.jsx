@@ -1,25 +1,34 @@
-// import React from 'react'
+import { useSelector } from "react-redux";
+import { Outlet, Route, Routes } from "react-router-dom";
+import Sidebar from "./components/shared/sidebar";
 
-import { Outlet } from "react-router-dom";
-import Navbar from "./components/shared/Navbar";
-import Aside from "./components/ui/Aside";
-import { useState } from "react";
+const App = () => {
+  const { activeSong } = useSelector((state) => state.player);
 
-const RootLayout = () => {
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
   return (
-    <div className="">
-      <Navbar
-        isMobileOpen={isMobileOpen}
-        setIsMobileOpen={setIsMobileOpen}
-      ></Navbar>
-      <Aside
-        isMobileOpen={isMobileOpen}
-        setIsMobileOpen={setIsMobileOpen}
-      ></Aside>
-      <Outlet></Outlet>
+    <div className="relative flex">
+      <Sidebar />
+      {/* bg-gradient-to-br from-black to-[#121286] */}
+      <div className="flex-1 flex flex-col bg-gradient-color-caseStudy">
+        {/* <Searchbar /> */}
+
+        <div className="px-6 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse">
+          <div className="flex-1 h-fit pb-40">
+            <Outlet></Outlet>
+          </div>
+          <div className="xl:sticky relative top-0 h-fit">
+            {/* <TopPlay /> */}
+          </div>
+        </div>
+      </div>
+
+      {/* {activeSong?.title && (
+        <div className="absolute h-28 bottom-0 left-0 right-0 flex animate-slideup bg-gradient-to-br from-white/10 to-[#2a2a80] backdrop-blur-lg rounded-t-3xl z-10">
+          <MusicPlayer />
+        </div>
+      )} */}
     </div>
   );
 };
 
-export default RootLayout;
+export default App;

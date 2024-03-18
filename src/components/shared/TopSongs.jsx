@@ -10,7 +10,7 @@ import { FreeMode } from "swiper";
 import "swiper/css";
 import "swiper/css/free-mode";
 import PlayPause from "../ui/PlayPause";
-import { useGetTopChartsQuery } from "../../redux/services/shazamCore";
+import { useGetTopChartsQuery } from "../../redux/services/shazamSong";
 import { playPause, setActiveSong } from "../../redux/features/playerSlice";
 
 const TopChartCard = ({

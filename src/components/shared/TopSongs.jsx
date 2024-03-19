@@ -34,12 +34,10 @@ const TopChartCard = ({
         alt={song?.title}
       />
       <div className="flex-1 flex flex-col justify-center mx-3">
-        <Link to={`/songs/${song.key}`}>
+        <Link to={`/song/${song.key}`}>
           <p className="text-xl font-bold text-white">{song?.title}</p>
         </Link>
-        <Link to={`/artists/${song?.artists[0].adamid}`}>
-          <p className="text-base text-gray-300 mt-1">{song?.subtitle}</p>
-        </Link>
+        <p className="text-base text-gray-300 mt-1">{song?.subtitle}</p>
       </div>
     </div>
     <PlayPause
@@ -55,11 +53,11 @@ const TopChartCard = ({
 const TopSongs = () => {
   const dispatch = useDispatch();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
-  const { data } = useGetTopChartsQuery();
+  const { data, isFetching, error } = useGetTopChartsQuery();
   const divRef = useRef(null);
 
   useEffect(() => {
-    divRef.current.scrollIntoView({ behavior: "smooth" });
+    divRef?.current?.scrollIntoView({ behavior: "smooth" });
   });
 
   const topPlays = data?.tracks?.slice(0, 5);
@@ -72,6 +70,17 @@ const TopSongs = () => {
     dispatch(setActiveSong({ song, data, i }));
     dispatch(playPause(true));
   };
+
+  if (isFetching) {
+    return (
+      <div className="flex flex-col space-y-4">
+        <div className=" h-20 w-[400px] bg-blue-200 opacity-40 rounded-lg animate-pulse"></div>
+        <div className=" h-20 w-[400px] bg-blue-200 opacity-40 rounded-lg animate-pulse"></div>
+        <div className=" h-20 w-[400px] bg-blue-200 opacity-40 rounded-lg animate-pulse"></div>
+        <div className=" h-20 w-[400px] bg-blue-200 opacity-40 rounded-lg animate-pulse"></div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -122,15 +131,13 @@ const TopSongs = () => {
             <SwiperSlide
               key={artist?.key}
               style={{ width: "25%", height: "auto" }}
-              className="shadow-lg rounded-full animate-slideright"
+              className="shadow-lg animate-slideright"
             >
-              <Link to={`/artists/${artist?.artists[0].adamid}`}>
-                <img
-                  src={artist?.images?.background}
-                  alt="Name"
-                  className="rounded-full w-full object-cover"
-                />
-              </Link>
+              <img
+                src={artist?.images?.background}
+                alt="Name"
+                className="hover:opacity-55 w-full object-cover"
+              />
             </SwiperSlide>
           ))}
         </Swiper>

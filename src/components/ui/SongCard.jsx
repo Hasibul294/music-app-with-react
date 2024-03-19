@@ -22,7 +22,8 @@ const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
       <div className="relative w-full h-56 group">
         <div
           className={`absolute inset-0 justify-center items-center bg-white bg-opacity-30 group-hover:flex ${
-            activeSong?.title === song.title
+            (activeSong?.title && activeSong?.title === song?.title) ||
+            (activeSong?.name && activeSong?.name === song?.name)
               ? "flex bg-black bg-opacity-70"
               : "hidden"
           }`}
@@ -37,25 +38,30 @@ const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
         </div>
         <img
           alt="song_img"
-          src={song.images?.coverart}
+          src={
+            (song?.images && song?.images?.coverart) ||
+            (song?.album?.images && song?.album.images[1]?.url) ||
+            "https://img.freepik.com/free-photo/texture-treble-clef-dark-background-isolated-generative-ai_169016-29581.jpg"
+          }
           className="w-full h-full rounded-lg"
         />
       </div>
 
       <div className="mt-4 flex flex-col">
         <p className="font-semibold text-lg text-white">
-          <Link to={`/songs/${song?.key}`}>{song.title}</Link>
+          <Link to={`/song/${song?.key}`}>{song?.title || song?.name}</Link>
         </p>
         <p className="text-sm text-gray-300 mt-1">
-          <Link
+          {/* <Link
             to={
               song.artists
                 ? `/artists/${song?.artists[0]?.adamid}`
                 : "/top-artists"
             }
-          >
-            <span className="text-[#03DCEB]">Artist:</span> {song.subtitle}
-          </Link>
+          > */}
+          <span className="text-[#03DCEB]">Artist:</span>{" "}
+          {song?.subtitle || song?.artists[0]?.name || "No artist found"}
+          {/* </Link> */}
         </p>
       </div>
     </div>

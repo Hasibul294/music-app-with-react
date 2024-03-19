@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   currentSongs: [],
@@ -6,11 +6,11 @@ const initialState = {
   isActive: false,
   isPlaying: false,
   activeSong: {},
-  genreListId: '',
+  genreListId: "",
 };
 
 const playerSlice = createSlice({
-  name: 'player',
+  name: "player",
   initialState,
   reducers: {
     setActiveSong: (state, action) => {
@@ -18,10 +18,13 @@ const playerSlice = createSlice({
 
       if (action.payload?.data?.tracks?.hits) {
         state.currentSongs = action.payload.data.tracks.hits;
+        // console.log("1", action.payload.data);
       } else if (action.payload?.data?.properties) {
         state.currentSongs = action.payload?.data?.tracks;
+        // console.log("2", action.payload.data);
       } else {
         state.currentSongs = action.payload.data;
+        // console.log("3", action.payload.data);
       }
 
       state.currentIndex = action.payload.i;
@@ -52,6 +55,7 @@ const playerSlice = createSlice({
 
     playPause: (state, action) => {
       state.isPlaying = action.payload;
+      console.log(action.payload);
     },
 
     selectGenreListId: (state, action) => {
@@ -60,6 +64,12 @@ const playerSlice = createSlice({
   },
 });
 
-export const { setActiveSong, nextSong, prevSong, playPause, selectGenreListId } = playerSlice.actions;
+export const {
+  setActiveSong,
+  nextSong,
+  prevSong,
+  playPause,
+  selectGenreListId,
+} = playerSlice.actions;
 
 export default playerSlice.reducer;

@@ -6,7 +6,6 @@ import {
   useGetSongRelatedQuery,
 } from "../../redux/services/shazamSong";
 import DetailsHeader from "../../components/ui/DetailsHeader";
-import RelatedSongs from "../../components/ui/RelatedSongs";
 import Loader from "../../components/ui/Loader";
 import Error from "../../components/ui/Error";
 
@@ -73,15 +72,6 @@ const SongDetails = () => {
           )}
         </div>
       </div>
-      {/* 
-      <RelatedSongs
-        data={data}
-        artistId={artistId}
-        isPlaying={isPlaying}
-        activeSong={activeSong}
-        handlePauseClick={handlePauseClick}
-        handlePlayClick={handlePlayClick}
-      /> */}
     </div>
   );
 };

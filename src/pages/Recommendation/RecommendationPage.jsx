@@ -57,7 +57,7 @@ const RecommendationPage = () => {
         </h2>
       </div>
 
-      <div className="flex flex-wrap sm:justify-start justify-center gap-8">
+      <div className="flex flex-wrap sm:justify-start justify-center gap-7">
         {recommendationSong?.tracks?.map((song, i) => (
           <SongCard
             key={song.id}

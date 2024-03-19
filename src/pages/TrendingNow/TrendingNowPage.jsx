@@ -27,7 +27,7 @@ const TrendingNow = () => {
         </h2>
       </div>
 
-      <div className="flex flex-wrap sm:justify-start justify-center gap-8">
+      <div className="flex flex-wrap sm:justify-start justify-center gap-7">
         {trendingSong?.map((song, i) => (
           <SongCard
             key={song.key}

@@ -11,6 +11,8 @@ import { store } from "./redux/store.js";
 import SongDetails from "./pages/SongDetails/SongDetailsPage.jsx";
 import RecommendationPage from "./pages/Recommendation/RecommendationPage.jsx";
 import TopArtistPage from "./pages/TopArtist/TopArtistPage.jsx";
+import Search from "./pages/Search/SearchPage.jsx";
+import Error from "./components/ui/Error.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
       {
         path: "/top-artists",
         element: <TopArtistPage></TopArtistPage>,
+      },
+      {
+        path: "/search/:searchTerm",
+        element: <Search></Search>,
+      },
+      {
+        path: "*",
+        element: <Error></Error>,
       },
     ],
   },
